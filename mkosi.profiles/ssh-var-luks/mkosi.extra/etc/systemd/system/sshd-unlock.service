@@ -1,0 +1,21 @@
+[Unit]
+Description=Temporary SSH daemon for unlocking /var
+After=network-online.target efi.mount
+Wants=network-online.target
+RequiresMountsFor=/efi
+# Automatically stop this daemon as soon as /var is mounted
+Conflicts=var.mount
+Before=var.mount
+# Don't start at all if /var is already mounted
+ConditionPathIsMountPoint=!/var
+
+[Service]
+RuntimeDirectory=sshd-unlock
+RuntimeDirectoryMode=0700
+# Generate an ephemeral host key in /run (or point HostKey to /efi/unlock/ to avoid SSH warnings)
+ExecStartPre=/usr/bin/ssh-keygen -t ed25519 -f /run/sshd-unlock/ssh_host_ed25519_key -N "" -q
+ExecStart=/usr/sbin/sshd -D -f /etc/ssh/sshd_unlock_config
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

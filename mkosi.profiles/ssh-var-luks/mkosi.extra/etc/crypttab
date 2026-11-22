@@ -1,0 +1,1 @@
+var PARTLABEL=persistent none luks,noauto,nofail,timeout=0,discard

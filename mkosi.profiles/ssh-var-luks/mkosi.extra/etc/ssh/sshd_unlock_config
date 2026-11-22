@@ -1,0 +1,9 @@
+Port 22
+HostKey /run/sshd-unlock/ssh_host_ed25519_key
+AuthorizedKeysFile /efi/unlock/authorized_keys
+PermitRootLogin prohibit-password
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+UsePAM no
+PidFile /run/sshd-unlock/sshd.pid
+Subsystem sftp internal-sftp

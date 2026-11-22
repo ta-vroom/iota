@@ -1,0 +1,1 @@
+/dev/mapper/var /var xfs defaults,noauto,nofail 0 0
