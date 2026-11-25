@@ -7,7 +7,11 @@ env:
 
 on: 
   workflow_dispatch:
-  push:
+    inputs:
+      skip_tests:
+        description: "Skip e2e tests"
+        type: boolean
+        default: false  push:
     branches: [ main ]
   workflow_call:
     inputs:
